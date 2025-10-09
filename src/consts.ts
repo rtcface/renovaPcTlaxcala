@@ -45,8 +45,8 @@ export interface SlideTheme {
   overlayColor: string;
 }
 
-export const SITE_TITLE = "MONA";
-export const SITE_DESCRIPTION = "Mona — Learn from What We Build";
+export const SITE_TITLE = "RenovaPcTlaxcala";
+export const SITE_DESCRIPTION = "RenovaPcTlaxcala — Learn from What We Build";
 
 export const PROD_URL = "https://www.mymona.xyz";
 
