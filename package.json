@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "astro dev",
     "prebuild": "pnpm run build:search-index",
-    "build": "astro build",
+    "build": "astro build && echo '/*    /.netlify/functions/entry   200' > dist/_redirects && cp -r dist/_astro .netlify/ && cp -r dist/img .netlify/",
     "build:analyze": "ANALYZE=true astro build",
     "build:search-index": "tsx scripts/build-pagefind-index.ts",
     "preview": "astro preview",
@@ -26,6 +26,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.3.6",
+    "@astrojs/netlify": "^6.5.12",
     "@astrojs/react": "^4.4.0",
     "@astrojs/rss": "^4.0.12",
     "@astrojs/vercel": "^8.2.8",
@@ -33,7 +34,7 @@
     "@radix-ui/react-dialog": "^1.1.15",
     "@vercel/og": "^0.8.5",
     "animejs": "^4.1.4",
-    "astro": "^5.14.0",
+    "astro": "^5.12.0",
     "astro-social-share": "^2.2.0",
     "clsx": "^2.1.1",
     "js-base64": "^3.7.8",

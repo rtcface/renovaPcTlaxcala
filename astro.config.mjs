@@ -7,12 +7,13 @@ import { defineConfig } from "astro/config";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import { analyzer } from "vite-bundle-analyzer";
 import { env } from "./src/env";
+import netlify from "@astrojs/netlify";
 
 export default defineConfig({
-  server: {
-    // This will allow all hosts to be used in development. Not only localhost.
-    allowedHosts: true,
-  },
+  output: 'server',
+  adapter: netlify({
+    edgeMiddleware: false
+  }),
   trailingSlash: "never",
   output: "server",
   image: {
