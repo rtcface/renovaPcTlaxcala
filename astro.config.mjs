@@ -1,27 +1,19 @@
 import mdx from "@astrojs/mdx";
+import netlify from "@astrojs/netlify";
 import react from "@astrojs/react";
-import vercel from "@astrojs/vercel";
 import sitemap from "@inox-tools/sitemap-ext";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import { analyzer } from "vite-bundle-analyzer";
 import { env } from "./src/env";
-import netlify from "@astrojs/netlify";
 
 export default defineConfig({
-  output: 'server',
-  adapter: netlify({
-    edgeMiddleware: false
-  }),
-  trailingSlash: "never",
   output: "server",
-  image: {
-    domains: ["public-files.gumroad.com"],
-  },
-  adapter: vercel({
-    imageService: true,
+  adapter: netlify({
+    edgeMiddleware: false,
   }),
+
   site: env().SITE_URL,
   markdown: {
     rehypePlugins: [rehypeSanitize(defaultSchema)],

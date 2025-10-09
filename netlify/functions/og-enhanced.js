@@ -1,22 +1,23 @@
-import { getEntry } from "astro:content";
-import { ImageResponse } from "@vercel/og";
-import { createElement, type ReactElement } from "react";
-import { SITE_TITLE } from "@/consts";
-import {
+const { getEntry } = require("astro:content");
+const satori = require("satori");
+const { render } = require("@resvg/resvg-js");
+const { createElement } = require("react");
+const { SITE_TITLE } = require("../../src/consts");
+const {
   createCardBackgroundStyles,
   createCardCSSVariables,
   parseCardContent,
-} from "@/lib/utils";
-import { KNOWLEDGE_CARD_THEME } from "@/themes/knowledge-card-themes";
-import { SLIDE_THEME_CONFIG } from "@/themes/slide-card-themes";
-import logo from "../../public/logo.png?inline";
+} = require("../../src/lib/utils");
+const {
+  KNOWLEDGE_CARD_THEME,
+} = require("../../src/themes/knowledge-card-themes");
+const { SLIDE_THEME_CONFIG } = require("../../src/themes/slide-card-themes");
 
-export const runtime = "edge";
+// Import the logo as base64 or similar - for now, we'll use a placeholder
+const logo =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="; // Placeholder
 
-async function generateCardOg(
-  id: string,
-  theme: string,
-): Promise<ReactElement> {
+async function generateCardOg(id, theme) {
   const card = await getEntry("cards", id);
   if (!card) {
     throw new Error(`Card with id ${id} not found`);
@@ -25,8 +26,7 @@ async function generateCardOg(
   if (!cardContent) {
     throw new Error("Error parsing card");
   }
-  const parsedCard: { title: string; description: string } =
-    cardContent.parsedData;
+  const parsedCard = cardContent.parsedData;
 
   const cardTheme =
     KNOWLEDGE_CARD_THEME[theme] || KNOWLEDGE_CARD_THEME.blackWhite;
@@ -187,20 +187,15 @@ async function generateCardOg(
   return cardElement;
 }
 
-async function generateSlideOg(
-  id: string,
-  theme: string,
-): Promise<ReactElement> {
+async function generateSlideOg(id, theme) {
   const slide = await getEntry("slides", id);
   if (!slide) {
     throw new Error(`Slide with id ${id} not found`);
   }
 
-  const themeConfig =
-    SLIDE_THEME_CONFIG[theme as keyof typeof SLIDE_THEME_CONFIG] ||
-    SLIDE_THEME_CONFIG.black;
+  const themeConfig = SLIDE_THEME_CONFIG[theme] || SLIDE_THEME_CONFIG.black;
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date) => {
     return new Intl.DateTimeFormat("en-US", {
       month: "short",
       day: "numeric",
@@ -330,52 +325,71 @@ async function generateSlideOg(
   return slideElement;
 }
 
-export const GET = async (req: Request) => {
-  try {
-    const { searchParams } = new URL(req.url);
-    const type = searchParams.get("type");
-    const id = searchParams.get("id");
-    const theme =
-      searchParams.get("th") || (type === "slide" ? "black" : "blackWhite");
-
-    if (!type || !id) {
-      return new Response("Missing type or id parameter", {
-        status: 400,
-      });
-    }
-
-    let element: ReactElement;
-    if (type === "card") {
-      element = await generateCardOg(id, theme);
-    } else if (type === "slide") {
-      element = await generateSlideOg(id, theme);
-    } else {
-      console.error(`[OG Generation] Unsupported type: ${type}`);
-      return new Response("Invalid type parameter", { status: 400 });
-    }
-
-    return new ImageResponse(element, {
-      width: 1200,
-      height: 630,
-      headers: {
-        "Content-Type": "image/png",
-        "Cache-Control": "public, immutable, no-transform, max-age=31536000",
-      },
-    });
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error(`[OG Generation Error] ${errorMessage}`, error);
-    return new Response(`Failed to generate OG image: ${errorMessage}`, {
-      status: 500,
-    });
-  }
-};
-
-function parseCSSVars(cssVarString: string): Record<string, string> {
-  const obj: Record<string, string> = {};
+function parseCSSVars(cssVarString) {
+  const obj = {};
   cssVarString.split(";").forEach((line) => {
     const [key, value] = line.split(":").map((s) => s.trim());
     if (key && value) obj[key.replace(/^--/, "")] = value;
   });
   return obj;
 }
+
+exports.handler = async (event) => {
+  try {
+    const { queryStringParameters } = event;
+    const type = queryStringParameters?.type;
+    const id = queryStringParameters?.id;
+    const theme =
+      queryStringParameters?.th || (type === "slide" ? "black" : "blackWhite");
+
+    if (!type || !id) {
+      return {
+        statusCode: 400,
+        body: "Missing type or id parameter",
+      };
+    }
+
+    let element;
+    if (type === "card") {
+      element = await generateCardOg(id, theme);
+    } else if (type === "slide") {
+      element = await generateSlideOg(id, theme);
+    } else {
+      return {
+        statusCode: 400,
+        body: "Invalid type parameter",
+      };
+    }
+
+    // Generate SVG using satori
+    const svg = await satori(element, {
+      width: 1200,
+      height: 630,
+      fonts: [], // Add fonts if needed
+    });
+
+    // Convert SVG to PNG using resvg
+    const pngBuffer = render(svg, {
+      fitTo: {
+        mode: "width",
+        value: 1200,
+      },
+    });
+
+    return {
+      statusCode: 200,
+      headers: {
+        "Content-Type": "image/png",
+        "Cache-Control": "public, immutable, no-transform, max-age=31536000",
+      },
+      body: pngBuffer.toString("base64"),
+      isBase64Encoded: true,
+    };
+  } catch (error) {
+    console.error("[OG Generation Error]", error);
+    return {
+      statusCode: 500,
+      body: `Failed to generate OG image: ${error.message}`,
+    };
+  }
+};

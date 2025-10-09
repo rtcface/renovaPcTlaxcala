@@ -29,5 +29,6 @@ public/js/
 public/_pagefind/
 public/slides/
 
+.netlify
 .claude
 CLAUDE.md
