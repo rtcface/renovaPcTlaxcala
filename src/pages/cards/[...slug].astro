@@ -128,7 +128,7 @@ const getCardMetadata = () => {
 };
 
 const { title: cardTitle, description } = getCardMetadata();
-const ogImageUrl = new URL("/.netlify/functions/og-enhanced", Astro.url);
+const ogImageUrl = new URL("/og-enhanced", Astro.url);
 let cardDescription = description;
 if (description.length > 50) {
   let truncated = description.substring(0, 50);

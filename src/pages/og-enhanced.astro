@@ -1,23 +1,21 @@
-const { getEntry } = require("astro:content");
-const satori = require("satori");
-const { render } = require("@resvg/resvg-js");
-const { createElement } = require("react");
-const { SITE_TITLE } = require("../../src/consts");
-const {
+---
+export const prerender = false;
+
+import { getEntry } from "astro:content";
+import { Resvg } from "@resvg/resvg-js";
+import React, { createElement } from "react";
+import satori from "satori";
+import { SITE_TITLE } from "@/consts";
+import {
   createCardBackgroundStyles,
   createCardCSSVariables,
   parseCardContent,
-} = require("../../src/lib/utils");
-const {
-  KNOWLEDGE_CARD_THEME,
-} = require("../../src/themes/knowledge-card-themes");
-const { SLIDE_THEME_CONFIG } = require("../../src/themes/slide-card-themes");
+} from "@/lib/utils";
+import { KNOWLEDGE_CARD_THEME } from "@/themes/knowledge-card-themes";
+import { SLIDE_THEME_CONFIG } from "@/themes/slide-card-themes";
+import logo from "../../public/logo.png?inline";
 
-// Import the logo as base64 or similar - for now, we'll use a placeholder
-const logo =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="; // Placeholder
-
-async function generateCardOg(id, theme) {
+async function generateCardOg(id: string, theme: string) {
   const card = await getEntry("cards", id);
   if (!card) {
     throw new Error(`Card with id ${id} not found`);
@@ -187,15 +185,17 @@ async function generateCardOg(id, theme) {
   return cardElement;
 }
 
-async function generateSlideOg(id, theme) {
+async function generateSlideOg(id: string, theme: string) {
   const slide = await getEntry("slides", id);
   if (!slide) {
     throw new Error(`Slide with id ${id} not found`);
   }
 
-  const themeConfig = SLIDE_THEME_CONFIG[theme] || SLIDE_THEME_CONFIG.black;
+  const themeConfig =
+    SLIDE_THEME_CONFIG[theme as keyof typeof SLIDE_THEME_CONFIG] ||
+    SLIDE_THEME_CONFIG.black;
 
-  const formatDate = (date) => {
+  const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat("en-US", {
       month: "short",
       day: "numeric",
@@ -325,8 +325,8 @@ async function generateSlideOg(id, theme) {
   return slideElement;
 }
 
-function parseCSSVars(cssVarString) {
-  const obj = {};
+function parseCSSVars(cssVarString: string): Record<string, string> {
+  const obj: Record<string, string> = {};
   cssVarString.split(";").forEach((line) => {
     const [key, value] = line.split(":").map((s) => s.trim());
     if (key && value) obj[key.replace(/^--/, "")] = value;
@@ -334,31 +334,27 @@ function parseCSSVars(cssVarString) {
   return obj;
 }
 
-exports.handler = async (event) => {
+export async function GET({ request }: { request: Request }) {
   try {
-    const { queryStringParameters } = event;
-    const type = queryStringParameters?.type;
-    const id = queryStringParameters?.id;
+    const { searchParams } = new URL(request.url);
+    const type = searchParams.get("type");
+    const id = searchParams.get("id");
     const theme =
-      queryStringParameters?.th || (type === "slide" ? "black" : "blackWhite");
+      searchParams.get("th") || (type === "slide" ? "black" : "blackWhite");
 
     if (!type || !id) {
-      return {
-        statusCode: 400,
-        body: "Missing type or id parameter",
-      };
+      return new Response("Missing type or id parameter", {
+        status: 400,
+      });
     }
 
-    let element;
+    let element: React.ReactElement;
     if (type === "card") {
       element = await generateCardOg(id, theme);
     } else if (type === "slide") {
       element = await generateSlideOg(id, theme);
     } else {
-      return {
-        statusCode: 400,
-        body: "Invalid type parameter",
-      };
+      return new Response("Invalid type parameter", { status: 400 });
     }
 
     // Generate SVG using satori
@@ -369,27 +365,28 @@ exports.handler = async (event) => {
     });
 
     // Convert SVG to PNG using resvg
-    const pngBuffer = render(svg, {
+    const resvg = new Resvg(svg, {
       fitTo: {
         mode: "width",
         value: 1200,
       },
     });
+    const pngBuffer = resvg.render().asPng();
 
-    return {
-      statusCode: 200,
+    return new Response(new Uint8Array(pngBuffer), {
       headers: {
         "Content-Type": "image/png",
         "Cache-Control": "public, immutable, no-transform, max-age=31536000",
       },
-      body: pngBuffer.toString("base64"),
-      isBase64Encoded: true,
-    };
+    });
   } catch (error) {
     console.error("[OG Generation Error]", error);
-    return {
-      statusCode: 500,
-      body: `Failed to generate OG image: ${error.message}`,
-    };
+    return new Response(
+      `Failed to generate OG image: ${(error as Error).message}`,
+      {
+        status: 500,
+      },
+    );
   }
-};
+}
+---

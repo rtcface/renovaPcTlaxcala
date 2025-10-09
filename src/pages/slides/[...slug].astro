@@ -41,7 +41,7 @@ if (!slide) {
 const allSlides = await getCollection("slides");
 const adjacentContent = getAdjacentContent(allSlides, slide.id);
 
-const ogImageUrl = new URL("/.netlify/functions/og-enhanced", Astro.url);
+const ogImageUrl = new URL("/og-enhanced", Astro.url);
 const description = slide.data.description;
 if (description.length > 50) {
   let truncated = description.substring(0, 50);
