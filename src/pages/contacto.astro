@@ -1,0 +1,157 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+---
+
+<MainLayout
+  title={`Contacto | ${SITE_TITLE}`}
+  description="Contacta con RenovaPC Tlaxcala para optimizar y darle una segunda vida a tu computadora"
+  keywords="Contacto, WhatsApp, RenovaPC Tlaxcala, Reparación PC, Mantenimiento computadoras"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-16">
+      <h1 class="text-5xl font-bold text-white mb-4">Contáctanos</h1>
+      <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+        Estamos aquí para ayudarte a darle una segunda vida a tu computadora
+      </p>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-2">
+      <!-- Formulario de contacto -->
+      <div class="bg-slate-900/50 rounded-lg p-8 border border-slate-800">
+        <h2 class="text-2xl font-bold text-white mb-6">Envíanos un Mensaje</h2>
+        <form
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+          class="space-y-6"
+        >
+          <div>
+            <label for="name" class="block text-sm font-medium text-slate-300 mb-2">
+              Nombre
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="Tu nombre"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-300 mb-2">
+              Correo Electrónico
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="tu@email.com"
+            />
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-slate-300 mb-2">
+              Mensaje
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="5"
+              class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="Cuéntanos cómo podemos ayudarte..."
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full px-8 py-4 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+          >
+            Enviar Mensaje
+          </button>
+        </form>
+      </div>
+
+      <!-- Información de contacto y redes sociales -->
+      <div class="space-y-6">
+        <!-- Información de contacto -->
+        <div class="bg-slate-900/50 rounded-lg p-8 border border-slate-800">
+          <h2 class="text-2xl font-bold text-white mb-6">Información de Contacto</h2>
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-lg font-semibold text-white mb-2">📍 Ubicación</h3>
+              <p class="text-slate-400">
+                Calle 4 Ed. 42 Depto B<br />
+                Felipe Santiago Xicoténcatl<br />
+                90030 Tlaxcala de Xicohténcatl, Tlax.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Redes sociales -->
+        <div class="bg-slate-900/50 rounded-lg p-8 border border-slate-800">
+          <h2 class="text-2xl font-bold text-white mb-6">Síguenos en Redes Sociales</h2>
+          <div class="space-y-4">
+            <a
+              href="https://wa.me/52461715930"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-4 bg-green-600/20 hover:bg-green-600/30 rounded-lg border border-green-600/30 transition-colors"
+            >
+              <span class="text-3xl">💬</span>
+              <div>
+                <h3 class="text-lg font-semibold text-white">WhatsApp</h3>
+                <p class="text-slate-400 text-sm">Contáctanos directamente</p>
+              </div>
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-4 bg-blue-600/20 hover:bg-blue-600/30 rounded-lg border border-blue-600/30 transition-colors"
+            >
+              <span class="text-3xl">📘</span>
+              <div>
+                <h3 class="text-lg font-semibold text-white">Facebook</h3>
+                <p class="text-slate-400 text-sm">Síguenos en Facebook</p>
+              </div>
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-4 bg-pink-600/20 hover:bg-pink-600/30 rounded-lg border border-pink-600/30 transition-colors"
+            >
+              <span class="text-3xl">📷</span>
+              <div>
+                <h3 class="text-lg font-semibold text-white">Instagram</h3>
+                <p class="text-slate-400 text-sm">Síguenos en Instagram</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mapa -->
+        <div class="bg-slate-900/50 rounded-lg p-8 border border-slate-800">
+          <h2 class="text-2xl font-bold text-white mb-6">Ubicación</h2>
+          <div class="aspect-video rounded-lg overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.1234567890123!2d-98.23456789012345!3d19.345678901234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDIwJzQ0LjQiTiA5OMKwMTQnMDQuNCJX!5e0!3m2!1ses!2smx!4v1234567890123!5m2!1ses!2smx"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+
+

@@ -1,0 +1,72 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+---
+
+<MainLayout
+  title={`Servicios | ${SITE_TITLE}`}
+  description="Servicios de optimización, limpieza, cambio de disco e instalación de Windows en RenovaPC Tlaxcala"
+  keywords="Mantenimiento PC, Optimización, Limpieza de computadoras, Cambio de disco SSD, Instalación de Windows, Tlaxcala"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-16">
+      <h1 class="text-5xl font-bold text-white mb-4">Nuestros Servicios</h1>
+      <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+        Ofrecemos soluciones completas para darle una segunda vida a tu computadora
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+      <!-- Optimización de equipos -->
+      <div class="bg-slate-900/50 rounded-lg p-8 hover:bg-slate-900/70 transition-colors border border-slate-800">
+        <div class="text-5xl mb-4">💻</div>
+        <h2 class="text-2xl font-bold text-white mb-4">Optimización de Equipos</h2>
+        <p class="text-slate-400 leading-relaxed">
+          Mejoramos el rendimiento de tu PC eliminando procesos innecesarios y optimizando el sistema operativo. Tu computadora funcionará más rápido y eficientemente.
+        </p>
+      </div>
+
+      <!-- Limpieza profesional -->
+      <div class="bg-slate-900/50 rounded-lg p-8 hover:bg-slate-900/70 transition-colors border border-slate-800">
+        <div class="text-5xl mb-4">🧹</div>
+        <h2 class="text-2xl font-bold text-white mb-4">Limpieza Profesional</h2>
+        <p class="text-slate-400 leading-relaxed">
+          Desarmamos y limpiamos tu computadora para mejorar la ventilación y evitar sobrecalentamientos. Eliminamos polvo, residuos y suciedad acumulada.
+        </p>
+      </div>
+
+      <!-- Cambio de disco -->
+      <div class="bg-slate-900/50 rounded-lg p-8 hover:bg-slate-900/70 transition-colors border border-slate-800">
+        <div class="text-5xl mb-4">💽</div>
+        <h2 class="text-2xl font-bold text-white mb-4">Cambio de Disco (HDD a SSD)</h2>
+        <p class="text-slate-400 leading-relaxed">
+          Reemplazamos tu disco duro por un SSD para aumentar la velocidad hasta 10 veces. Tu computadora arrancará más rápido y las aplicaciones se abrirán instantáneamente.
+        </p>
+      </div>
+
+      <!-- Instalación de Windows -->
+      <div class="bg-slate-900/50 rounded-lg p-8 hover:bg-slate-900/70 transition-colors border border-slate-800">
+        <div class="text-5xl mb-4">🪟</div>
+        <h2 class="text-2xl font-bold text-white mb-4">Instalación de Windows</h2>
+        <p class="text-slate-400 leading-relaxed">
+          Instalamos versiones actualizadas y seguras de Windows con todos los controladores esenciales. Tu sistema operativo estará actualizado y optimizado.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-16 text-center">
+      <p class="text-xl text-white mb-6">
+        No compres una PC nueva, ¡revívela con RenovaPC Tlaxcala!
+      </p>
+      <a
+        href="/contacto"
+        class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors text-lg"
+      >
+        Contáctanos Ahora
+      </a>
+    </div>
+  </div>
+</MainLayout>
+
+
+

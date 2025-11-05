@@ -9,7 +9,7 @@ const { uniqueTags } = Astro.props;
 ---
 
 <section
-  class="relative h-[calc(100vh-4rem)] overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
+  class="relative min-h-[calc(100vh-4rem)] h-auto md:h-[calc(100vh-4rem)] overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-8 md:py-0"
 >
   <div
     class="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)] animate-pulse"
@@ -19,20 +19,23 @@ const { uniqueTags } = Astro.props;
   <ScrollingTags uniqueTags={uniqueTags} />
 
   <div
-    class="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"
+    class="absolute top-1/4 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"
+    style="background-color: hsl(220 100% 30% / 0.1);"
   >
   </div>
   <div
-    class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"
+    class="absolute bottom-1/4 right-1/4 w-64 h-64 md:w-96 md:h-96 rounded-full blur-3xl animate-pulse delay-1000"
+    style="background-color: hsl(51 100% 50% / 0.1);"
   >
   </div>
   <div
-    class="absolute top-1/2 right-1/3 w-64 h-64 bg-purple-500/10 rounded-full blur-2xl animate-pulse delay-2000"
+    class="absolute top-1/2 right-1/3 w-48 h-48 md:w-64 md:h-64 bg-primary/10 rounded-full blur-2xl animate-pulse delay-2000"
+    style="background-color: hsl(220 100% 30% / 0.15);"
   >
   </div>
 
   <div
-    class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex items-center pointer-events-none"
+    class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-h-full flex items-center pointer-events-none py-8 md:py-0"
   >
     <div class="text-center w-full">
       <div
@@ -40,21 +43,25 @@ const { uniqueTags } = Astro.props;
         id="mona-text"
       >
         <h1
-          class="mb-4 text-5xl font-bold tracking-tight text-white sm:text-7xl"
+          class="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl px-4"
         >
-          <span class="text-primary text-glow animate-pulse">RenovaPcTlaxcala</span> — Damos nueva vida a tu computadora
+          <span class="text-primary text-glow animate-pulse">¡Renueva tu PC y dale una segunda vida!</span>
         </h1>
 
-        <p class="mx-auto max-w-4xl text-xl text-white leading-relaxed">
-          Revivimos
-          <span class="text-nebula"> computadoras</span>,{" "}
-          <span class="text-solar">Ahorra dinero</span>{" "}
-          y{" "}
-          <span class="text-cosmic"> ayuda al planeta, </span>{
-            " "
-          }
-          ayudamos a que tu computadora o laptop vuelva a funcionar como nueva.
+        <p class="mx-auto max-w-4xl text-base sm:text-lg md:text-xl text-white leading-relaxed mb-6 md:mb-8 px-4">
+          En RenovaPC Tlaxcala optimizamos, limpiamos e instalamos Windows para que tu equipo funcione como nuevo.
         </p>
+        
+        <div class="flex justify-center gap-4 pointer-events-auto px-4">
+          <a
+            href="https://wa.me/52461715930"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors text-sm sm:text-base md:text-lg"
+          >
+            Contáctanos por WhatsApp
+          </a>
+        </div>
       </div>
     </div>
   </div>

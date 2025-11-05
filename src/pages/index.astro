@@ -1,112 +1,144 @@
 ---
-import { getCollection } from "astro:content";
-import BlogCard from "@/components/blog/BlogCard.astro";
-import CardCover from "@/components/knowledge-card/CardCover.astro";
 import HeroSection from "@/components/landing-page/HeroSection.astro";
-import LatestSection from "@/components/landing-page/LatestSection.astro";
-import SlideCard from "@/components/slide/SlideCard.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import { SITE_TITLE } from "@/consts";
 import MainLayout from "@/layouts/MainLayout.astro";
 
-const allPosts = (await getCollection("blogs"))
-  .map((post) => ({
-    id: post.id,
-    title: post.data.title,
-    description: post.data.description,
-    pubDate: post.data.pubDate,
-    tags: post.data.tags,
-    updatedDate: post.data.updatedDate,
-    author: post.data.author,
-    metadata: post.data.metadata,
-  }))
-  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
-
-const allCards = (await getCollection("cards"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .map((card) => ({
-    id: card.id,
-    title: card.data.title,
-    template: card.data.template,
-    tags: card.data.tags,
-  }));
-
-const allSlides = (await getCollection("slides"))
-  .filter((slide) => slide.data.pubDate) // Filter out slides without pubDate
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .map((slide) => ({
-    id: slide.id,
-    title: slide.data.title,
-    description: slide.data.description,
-    author: slide.data.author,
-    transition: slide.data.transition,
-    theme: slide.data.theme,
-    pubDate: slide.data.pubDate,
-    tags: slide.data.tags,
-  }));
-
-const allTags = [
-  ...allPosts.flatMap((post) => post.tags || []),
-  ...allCards.flatMap((card) => card.tags || []),
-  ...allSlides.flatMap((slide) => slide.tags || []),
-];
-const uniqueTags = [...new Set(allTags)];
-
-const posts = allPosts.slice(0, 3);
-const cards = allCards.slice(0, 9);
-const slides = allSlides.slice(0, 6);
+const uniqueTags = ["Optimización", "Limpieza", "SSD", "Windows", "Mantenimiento", "Tlaxcala"];
 ---
 
 <MainLayout
-  title={`Home | ${SITE_TITLE}`}
-  description={SITE_DESCRIPTION}
+  title={`${SITE_TITLE} | Optimización y Mantenimiento de Computadoras`}
+  description="RenovaPC Tlaxcala optimiza, limpia y repara computadoras para que funcionen como nuevas. ¡Dale una segunda vida a tu equipo!"
+  keywords="Mantenimiento PC, Optimización, Limpieza de computadoras, Cambio de disco SSD, Instalación de Windows, Tlaxcala, RenovaPC"
+  author="RenovaPC Tlaxcala"
   className="w-full p-0"
 >
   <HeroSection uniqueTags={uniqueTags} />
 
-  <div class="px-4 md:px-6">
-    <LatestSection
-      title="Articles"
-      accentColor="text-nebula"
-      description="Fresh insights and lessons from our recent explorations."
-      viewAllHref="/blogs"
-      viewAllText="View All Articles"
-      viewAllButtonWidth="165px"
-    >
-      {posts.map((blog) => <BlogCard blog={blog} />)}
-    </LatestSection>
+  <div class="px-4 md:px-6 py-12">
+    <!-- Servicios Destacados -->
+    <section class="bg-slate-900/30 py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="mb-4 text-3xl font-bold text-white">
+            Nuestros <span class="text-primary">Servicios</span>
+          </h2>
+          <p class="text-slate-400 text-lg">
+            Soluciones completas para darle una segunda vida a tu computadora
+          </p>
+        </div>
 
-    <LatestSection
-      title="Cards"
-      accentColor="text-solar"
-      description="Check out our quick notes and summaries"
-      viewAllHref="/cards"
-      viewAllText="View All Cards"
-      viewAllButtonWidth="154px"
-    >
-      {
-        cards.map((card) => (
-          <a href={`/cards/${card.id}`}>
-            <CardCover title={card.title} template={card.template} />
-          </a>
-        ))
-      }
-    </LatestSection>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div class="bg-slate-800/50 rounded-lg p-6 hover:bg-slate-800/70 transition-colors border border-slate-700">
+            <div class="text-4xl mb-4">💻</div>
+            <h3 class="text-xl font-bold text-white mb-3">Optimización</h3>
+            <p class="text-slate-400 text-sm">
+              Mejoramos el rendimiento eliminando procesos innecesarios y optimizando el sistema.
+            </p>
+          </div>
 
-    <LatestSection
-      title="Slides"
-      accentColor="text-cosmic"
-      description="Interactive presentations crafted for developers."
-      viewAllHref="/slides"
-      viewAllText="View All Slides"
-      viewAllButtonWidth="155px"
-    >
-      {
-        slides.map((slide) => (
-          <a href={`/slides/${slide.id}`}>
-            <SlideCard slide={slide} />
+          <div class="bg-slate-800/50 rounded-lg p-6 hover:bg-slate-800/70 transition-colors border border-slate-700">
+            <div class="text-4xl mb-4">🧹</div>
+            <h3 class="text-xl font-bold text-white mb-3">Limpieza</h3>
+            <p class="text-slate-400 text-sm">
+              Limpieza profesional para mejorar la ventilación y evitar sobrecalentamientos.
+            </p>
+          </div>
+
+          <div class="bg-slate-800/50 rounded-lg p-6 hover:bg-slate-800/70 transition-colors border border-slate-700">
+            <div class="text-4xl mb-4">💽</div>
+            <h3 class="text-xl font-bold text-white mb-3">Cambio de Disco</h3>
+            <p class="text-slate-400 text-sm">
+              Reemplazamos HDD por SSD para aumentar la velocidad hasta 10 veces.
+            </p>
+          </div>
+
+          <div class="bg-slate-800/50 rounded-lg p-6 hover:bg-slate-800/70 transition-colors border border-slate-700">
+            <div class="text-4xl mb-4">🪟</div>
+            <h3 class="text-xl font-bold text-white mb-3">Instalación Windows</h3>
+            <p class="text-slate-400 text-sm">
+              Instalamos versiones actualizadas y seguras de Windows con controladores.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-12 text-center">
+          <a
+            href="/servicios"
+            class="inline-flex items-center gap-2 rounded-md border border-slate-600 bg-transparent px-6 py-3 text-sm font-medium text-slate-300 shadow-xs transition-all duration-300 hover:scale-105 hover:bg-slate-800 hover:text-accent-foreground"
+          >
+            Ver Todos los Servicios
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              ></path>
+            </svg>
           </a>
-        ))
-      }
-    </LatestSection>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="bg-slate-900/30 py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="mb-4 text-3xl font-bold text-white">
+            Testimonios de <span class="text-solar">Clientes</span>
+          </h2>
+          <p class="text-slate-400 text-lg">
+            Lo que dicen nuestros clientes satisfechos
+          </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-3">
+          <div class="bg-slate-800/50 rounded-lg p-6 border border-slate-700">
+            <p class="text-slate-300 mb-4 italic">
+              "Mi computadora estaba muy lenta y pensaba que necesitaba comprar una nueva. RenovaPC la optimizó y ahora funciona perfectamente. ¡Excelente servicio!"
+            </p>
+            <p class="text-white font-semibold">- María González</p>
+          </div>
+
+          <div class="bg-slate-800/50 rounded-lg p-6 border border-slate-700">
+            <p class="text-slate-300 mb-4 italic">
+              "El cambio de disco a SSD fue lo mejor que pude hacer. Mi laptop arranca en segundos. Muy profesionales y puntuales."
+            </p>
+            <p class="text-white font-semibold">- Juan Pérez</p>
+          </div>
+
+          <div class="bg-slate-800/50 rounded-lg p-6 border border-slate-700">
+            <p class="text-slate-300 mb-4 italic">
+              "La limpieza profesional que hicieron eliminó el problema de sobrecalentamiento. Muy recomendable, definitivamente volveré."
+            </p>
+            <p class="text-white font-semibold">- Ana Martínez</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="bg-gradient-to-r from-primary/20 to-solar/20 py-24 rounded-lg border border-primary/30">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold text-white mb-6">
+          No compres una PC nueva, ¡revívela con RenovaPC Tlaxcala!
+        </h2>
+        <p class="text-xl text-slate-300 mb-8">
+          Contáctanos hoy mismo y descubre cómo podemos darle una segunda vida a tu computadora
+        </p>
+        <a
+          href="/contacto"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors text-lg"
+        >
+          Contáctanos por WhatsApp
+        </a>
+      </div>
+    </section>
   </div>
 </MainLayout>

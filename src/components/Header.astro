@@ -1,5 +1,4 @@
 ---
-import { Search } from "lucide-react";
 import BetaBadge from "@/components/BetaBadge.astro";
 import CustomImage from "@/components/CustomImage.astro";
 import { getNavigationItems, SITE_TITLE } from "../consts";
@@ -16,7 +15,7 @@ const visibleMenuItems = getNavigationItems();
       <a href="/" class="flex items-center space-x-2 md:ml-0 ml-4">
         <CustomImage
           src="/logo.webp"
-          alt="mona"
+          alt="RenovaPC Tlaxcala"
           width={40}
           height={40}
           class="h-10 w-10"
@@ -79,15 +78,6 @@ const visibleMenuItems = getNavigationItems();
         }
       </nav>
     </div>
-    <div class="hidden md:block">
-      <a
-        href="/search"
-        class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium hover:text-primary transition-colors text-white"
-      >
-        <Search className="w-4 h-4" />
-        Search
-      </a>
-    </div>
   </div>
 
   <div class="md:hidden" id="mobile-menu">
@@ -104,15 +94,6 @@ const visibleMenuItems = getNavigationItems();
           </a>
         ))
       }
-      <div class="px-3 py-2">
-        <a
-          href="/search"
-          class="flex items-center gap-2 py-2 rounded-md text-base font-medium text-white hover:text-primary"
-        >
-          <Search className="w-4 h-4" />
-          Search
-        </a>
-      </div>
     </div>
   </div>
 </header>

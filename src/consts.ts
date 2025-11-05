@@ -45,8 +45,8 @@ export interface SlideTheme {
   overlayColor: string;
 }
 
-export const SITE_TITLE = "RenovaPcTlaxcala";
-export const SITE_DESCRIPTION = "RenovaPcTlaxcala — Learn from What We Build";
+export const SITE_TITLE = "RenovaPC Tlaxcala";
+export const SITE_DESCRIPTION = "RenovaPC Tlaxcala | Optimización y Mantenimiento de Computadoras";
 
 export const PROD_URL = "https://www.mymona.xyz";
 
@@ -80,33 +80,26 @@ export interface MenuItem {
 
 export const MENU_ITEMS: MenuItem[] = [
   {
-    id: "blogs",
-    label: "Articles",
-    href: "/blogs",
-    title: "Articles",
+    id: "servicios",
+    label: "Servicios",
+    href: "/servicios",
+    title: "Servicios",
     description:
-      "Practical guides, in-depth technical pieces, and lessons from real projects.",
+      "Conoce todos nuestros servicios de optimización, limpieza y mantenimiento de computadoras.",
   },
   {
-    id: "cards",
-    label: "Cards",
-    href: "/cards",
-    title: "Cards",
-    description: "Developer-Gathered, AI-Crafted, Human-Checked.",
+    id: "nosotros",
+    label: "Nosotros",
+    href: "/nosotros",
+    title: "Nosotros",
+    description: "Conoce más sobre RenovaPC Tlaxcala y nuestra misión.",
   },
   {
-    id: "slides",
-    label: "Slides",
-    href: "/slides",
-    title: "Slides",
-    description: "Interactive presentations crafted for developers.",
-  },
-  {
-    id: "open-source",
-    label: "GitHub",
-    href: "https://github.com/monakit/monakit",
-    title: "GitHub",
-    description: "Explore our open-source projects.",
+    id: "contacto",
+    label: "Contacto",
+    href: "/contacto",
+    title: "Contacto",
+    description: "Contáctanos para darle una segunda vida a tu computadora.",
   },
 ];
 

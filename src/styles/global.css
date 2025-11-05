@@ -10,19 +10,19 @@
   --card-foreground: 210 40% 98%;
   --popover: 222.2 84% 4.9%;
   --popover-foreground: 210 40% 98%;
-  --primary: 142 76% 36%;
-  --primary-foreground: 222.2 84% 4.9%;
-  --secondary: 217.2 32.6% 17.5%;
+  --primary: 220 100% 30%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 51 100% 50%;
   --secondary-foreground: 210 40% 98%;
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
+  --accent: 51 100% 50%;
   --accent-foreground: 210 40% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 40% 98%;
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
-  --ring: 142 76% 36%;
+  --ring: 220 100% 30%;
   --radius: 0.625rem;
 
   --spacing-xs: 0.25em;
@@ -54,26 +54,26 @@
   --card-foreground: 210 40% 98%;
   --popover: 222.2 84% 4.9%;
   --popover-foreground: 210 40% 98%;
-  --primary: 142 76% 36%;
-  --primary-foreground: 222.2 84% 4.9%;
-  --secondary: 217.2 32.6% 17.5%;
+  --primary: 220 100% 30%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 51 100% 50%;
   --secondary-foreground: 210 40% 98%;
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
+  --accent: 51 100% 50%;
   --accent-foreground: 210 40% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 40% 98%;
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
-  --ring: 142 76% 36%;
+  --ring: 220 100% 30%;
 }
 
 .mona {
-  --primary: 160 100% 43%;
-  --nebula: 142 71% 45%;
-  --solar: 32 100% 51%;
-  --cosmic: 84 81% 56%;
+  --primary: 220 100% 30%;
+  --nebula: 220 100% 30%;
+  --solar: 51 100% 50%;
+  --cosmic: 51 100% 50%;
 }
 
 pre.mermaid {
