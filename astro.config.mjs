@@ -14,7 +14,8 @@ export default defineConfig({
     edgeMiddleware: false,
   }),
 
-  site: env().SITE_URL,
+  // Site URL se puede configurar en Netlify o se detecta automáticamente
+  site: env().SITE_URL || undefined,
   markdown: {
     rehypePlugins: [rehypeSanitize(defaultSchema)],
   },

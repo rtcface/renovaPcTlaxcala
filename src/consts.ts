@@ -46,7 +46,8 @@ export interface SlideTheme {
 }
 
 export const SITE_TITLE = "RenovaPC Tlaxcala";
-export const SITE_DESCRIPTION = "RenovaPC Tlaxcala | Optimización y Mantenimiento de Computadoras";
+export const SITE_DESCRIPTION =
+  "RenovaPC Tlaxcala | Optimización y Mantenimiento de Computadoras";
 
 export const PROD_URL = "https://www.mymona.xyz";
 

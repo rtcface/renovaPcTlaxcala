@@ -12,8 +12,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "pnpm run build:search-index",
-    "build": "astro build && echo '/*    /.netlify/functions/entry   200' > dist/_redirects",
+    "prebuild": "npm run build:search-index",
+    "build": "astro build",
     "build:analyze": "ANALYZE=true astro build",
     "build:search-index": "tsx scripts/build-pagefind-index.ts",
     "preview": "astro preview",

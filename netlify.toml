@@ -6,6 +6,10 @@
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
 
+# El adaptador de Astro Netlify genera automáticamente:
+# - El archivo _redirects en dist/
+# - Las funciones de Netlify necesarias para SSR
+
 # Configuración para SSR con Astro
 # El adaptador de Astro Netlify maneja automáticamente las redirecciones
 # El archivo _redirects se genera automáticamente durante el build
